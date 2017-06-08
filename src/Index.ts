@@ -19,7 +19,7 @@ const MQTT_PASSWORD = process.env.MQTT_PASSWORD
 
 startMqttClient(MQTT_BROKER, MQTT_USERNAME, MQTT_PASSWORD)
   .flatMapLatest(mqttClient => {
-    mqttClient.subscribe('signalk/delta')
+    mqttClient.subscribe('signalk/delta', {qos: 1})
     return Bacon.fromEvent(mqttClient, 'message', signalKDeltaFromMQTTMessage)
   })
   .onValue(writeToPostGIS)

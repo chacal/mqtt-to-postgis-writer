@@ -1,0 +1,24 @@
+{
+  "name": "mqtt-to-postgis-writer",
+  "version": "1.0.0",
+  "description": "MQTT client that reads SignalK data from MQTT broker and writes it to PostGIS DB",
+  "main": "built/index.js",
+  "scripts": {
+    "postinstall": "./node_modules/.bin/tsc",
+    "start": "node ./built/index.js"
+  },
+  "author": "Jouni Hartikainen <jouni.hartikainen@iki.fi>",
+  "license": "ISC",
+  "dependencies": {
+    "baconjs": "^0.7.93",
+    "bluebird": "^3.5.0",
+    "mqtt": "^2.8.2",
+    "pg-promise": "^5.9.0",
+    "typescript": "^2.3.4"
+  },
+  "devDependencies": {
+    "@types/baconjs": "^0.7.32",
+    "@types/mqtt": "0.0.34",
+    "@types/node": "^7.0.29"
+  }
+}

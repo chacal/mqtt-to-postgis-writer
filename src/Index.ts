@@ -3,7 +3,7 @@ import process = require('process')
 import Bacon = require('baconjs')
 import EventStream = Bacon.EventStream
 import Client = mqtt.Client
-import { SignalKDelta } from './domain'
+import { SignalKDelta } from './Domain'
 import { writeToPostGIS } from "./PostGisWriter"
 
 // Declare fromEvent() version thas is used with MQTT message handler

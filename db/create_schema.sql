@@ -7,4 +7,4 @@ CREATE TABLE track (
   timestamp TIMESTAMP WITH TIME ZONE,
   point GEOGRAPHY(Point,4326) NOT NULL,
   PRIMARY KEY (vessel_id, timestamp)
-)
+);

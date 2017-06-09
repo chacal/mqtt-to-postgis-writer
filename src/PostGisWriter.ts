@@ -23,8 +23,12 @@ export function writeToPostGIS(delta: SignalKDelta) {
 
     function insertPosition(position: SignalKValue) {
       if(position.path === 'navigation.position') {
-        return db.query(`INSERT INTO track (vessel_id, timestamp, point)
-                  VALUES ($1, $2, st_point($3, $4))`,
+        return db.query(`
+            INSERT INTO track (vessel_id, timestamp, point)
+            VALUES ($1, $2, st_point($3, $4))
+            ON CONFLICT (vessel_id, timestamp)
+            DO UPDATE SET point = st_point($3, $4)
+          `,
           [delta.context, positionUpdate.timestamp, position.value.longitude, position.value.latitude])
           .catch(e => console.error(`Failed to write position to DB! Complete input data: ${JSON.stringify(delta)} Position: ${JSON.stringify(position)}`, e))
       } else {

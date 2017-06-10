@@ -16,10 +16,10 @@ const pgp: IMain = PgPromise({promiseLib: Bluebird})
 const db: IDatabase<any> = pgp(dbConfig)
 
 export function writeToPostGIS(delta: SignalKDelta) {
-  return Bluebird.map(delta.updates, insertPositionsFromUpdate)
+  return delta.updates.map(insertPositionsFromUpdate)
 
   function insertPositionsFromUpdate(positionUpdate: SignalKUpdate) {
-    return Bluebird.map(positionUpdate.values, insertPosition)
+    return positionUpdate.values.map(insertPosition)
 
     function insertPosition(position: SignalKValue) {
       if(position.path === 'navigation.position') {

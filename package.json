@@ -2,7 +2,7 @@
   "name": "mqtt-to-postgis-writer",
   "version": "1.0.0",
   "description": "MQTT client that reads SignalK data from MQTT broker and writes it to PostGIS DB",
-  "main": "built/index.js",
+  "main": "built/Index.js",
   "scripts": {
     "postinstall": "./node_modules/.bin/tsc",
     "start": "node ./built/index.js"

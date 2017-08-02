@@ -29,11 +29,15 @@ export function writeToPostGIS(delta: SignalKDelta) {
             ON CONFLICT (vessel_id, timestamp)
             DO UPDATE SET point = st_point($3, $4)
           `,
-          [delta.context, positionUpdate.timestamp, position.value.longitude, position.value.latitude])
+          [stripVesselsPrefix(delta.context), positionUpdate.timestamp, position.value.longitude, position.value.latitude])
           .catch(e => console.error(`Failed to write position to DB! Complete input data: ${JSON.stringify(delta)} Position: ${JSON.stringify(position)}`, e))
       } else {
         console.log(`Received unknown input data: ${JSON.stringify(delta)}`)
         return undefined
+      }
+
+      function stripVesselsPrefix(deltaContext: string): string {
+        return deltaContext.startsWith('vessels.') ? deltaContext.replace(/^vessels\./, '') : deltaContext
       }
     }
   }
